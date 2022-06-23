@@ -4,5 +4,4 @@ services:
   image: https-nginx
   build: .
   ports:
-   - "80:80"
    - "443:443"
