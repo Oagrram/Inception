@@ -1,0 +1,30 @@
+apt update && apt -y upgrade && apt install -y sudo && sudo apt install nginx mariadb-server mariadb-client wget lsb-release apt-transport-https ca-certificates  curl -y && wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list && apt update && apt upgrade -y && apt -y install php7.4-fpm  && service php7.4-fpm start && service  mysql restart && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && php wp-cli.phar --info && chmod +x wp-cli.phar && sudo mv wp-cli.phar /usr/local/bin/wp
+
+mkdir /var/www/	
+
+sudo ln -s /etc/nginx/sites-available/oagrram.42.fr /etc/nginx/sites-enabled/oagrram.42.fr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+wp core config --path=/var/www/wordpress --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASSWORD --dbhost=$DB_HOST --skip-check --allow-root
+
+
+
+Rm default in /etc/nginx/site* and create a link in /etc/nginx/site-enable pointed to avalbibel.conf
+DOMAINE NAME oagrram.42.fr
