@@ -1,6 +1,15 @@
 version: "3.6"
 services:
- nginx-https:
+ nginx:
   build: .
+  networks: 
+    - network
+  volumes:
+    - /home/oagrram/data/wordpress:/var/www/wordpress
   ports:
    - "443:443"
+networks:
+  network:
+    name: wp_network 
+    driver: bridge
+
