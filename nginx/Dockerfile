@@ -2,15 +2,23 @@ FROM  debian:buster
 
 ARG MY_HOST
 
-RUN apt update && apt -y upgrade && apt install -y nginx  openssl  wget
+WORKDIR /var/www/wordpress/
+
+RUN apt update && apt -y upgrade && apt install -y nginx  openssl sudo lsb-release apt-transport-https ca-certificates wget curl 
 
 RUN openssl req -x509 -nodes -days 365 -subj "/C=MA/ST=MA/O=1337, Inc./CN=1337.com" -addext "subjectAltName=DNS:1337.com" -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt;
 
-COPY default /etc/nginx/sites-available/
+COPY default-old /etc/nginx/sites-available/
+
+RUN sudo ln -s /etc/nginx/sites-available/default-old  /etc/nginx/sites-enabled/default-old 
+
+RUN  rm -rf /etc/nginx/sites-enabled/default
+
+
+#   RUN wp core download --allow-root
 
 #ENTRYPOINT service nginx restart && nginx -g 'daemon off;'
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+#ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
 
 #docker build --build-arg MY_HOST=$(docker-machine ip char) -t nginx .
