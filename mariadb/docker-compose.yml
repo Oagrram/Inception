@@ -1,16 +1,15 @@
 version: "3.6"
 services:
- nginx:
+ mariadb:
   build: .
-  container_name: nginx
-  networks: 
+  container_name: mariadb
+  networks:
     - network
   volumes:
-    - /home/oagrram/data/wordpress:/var/www/wordpress
+    - /home/oagrram/data/dbdata:/var/lib/mysql
   ports:
-   - "443:443"
+   - "3306:3306"
 networks:
   network:
     name: wp-network
     driver: bridge
-
