@@ -22,4 +22,4 @@ RUN apt update && apt -y upgrade && apt install -y mariadb-client sudo wget curl
 
 COPY setup.sh /etc/
 
-ENTRYPOINT "./etc/setup.sh"
+ENTRYPOINT "/etc/setup.sh"
