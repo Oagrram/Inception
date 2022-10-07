@@ -28,4 +28,4 @@ echo "FLUSH PRIVILEGES;" | mysql -u root
 
 # RUN SERVICE IN FORGROUND MODE
 
-mysqld_safe
+./usr/bin/mysqld_safe

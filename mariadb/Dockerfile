@@ -6,6 +6,6 @@ RUN apt update && apt -y upgrade
 
 COPY Setup_Database.sh /etc/
 
-ENTRYPOINT "/etc/Setup_Database.sh"
+#CMD  "/etc/Setup_Database.sh"
 
 #ENTRYPOINT [ "mysqld_safe"]
