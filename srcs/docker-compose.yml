@@ -1,0 +1,51 @@
+version: "3.6"
+
+services:
+
+# Nginx Container
+
+  nginx:
+    build: ./requirements/nginx/
+    container_name:  nginx
+    restart: unless-stopped
+    volumes:
+      - /home/oagrram/data/wordpress:/var/www/wordpress
+    ports:
+    - "443:443"
+    networks: 
+      - wp-network
+
+# Mariadb Container
+
+  mariadb:
+    build: ./requirements/mariadb/
+    container_name: mariadb
+    restart: unless-stopped
+    volumes:
+      - /home/oagrram/data/dbdata:/var/lib/mysql
+    ports:
+    - "3306:3306"
+    networks:
+      - wp-network
+
+# Wordpress Container
+
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    volumes:
+      - /home/oagrram/data/wordpress:/var/www/wordpress
+    ports:
+    - "9000:9000"
+    networks:
+      - wp-network
+
+
+# Network
+
+networks:
+  wp-network:
+    driver: bridge
