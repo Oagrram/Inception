@@ -6,46 +6,70 @@ services:
 
   nginx:
     build: ./requirements/nginx/
-    container_name:  nginx
+    image: nginx
+    container_name: nginx
     restart: unless-stopped
     volumes:
-      - /home/oagrram/data/wordpress:/var/www/wordpress
+      - wordpress_files:/var/www/wordpress
     ports:
     - "443:443"
+    - "80:80"
     networks: 
-      - wp-network
-
-# Mariadb Container
-
-  mariadb:
-    build: ./requirements/mariadb/
-    container_name: mariadb
-    restart: unless-stopped
-    volumes:
-      - /home/oagrram/data/dbdata:/var/lib/mysql
-    ports:
-    - "3306:3306"
-    networks:
-      - wp-network
+      - network
 
 # Wordpress Container
 
   wordpress:
     build: ./requirements/wordpress
+    image: wordpress
     container_name: wordpress
     depends_on:
       - mariadb
     restart: unless-stopped
     volumes:
-      - /home/oagrram/data/wordpress:/var/www/wordpress
+      - wordpress_files:/var/www/wordpress/
     ports:
     - "9000:9000"
+    env_file:
+        - .env
     networks:
-      - wp-network
+      - network
+
+# Mariadb Container
+
+  mariadb:
+    build: ./requirements/mariadb/
+    image: mariadb
+    container_name: mariadb
+    restart: unless-stopped
+    volumes:
+      - wordpress_db:/var/lib/mysql/
+    ports:
+    - "3306:3306"
+    env_file:
+        - .env
+    networks:
+      - network
 
 
 # Network
 
 networks:
-  wp-network:
+  network:
+    name: network
     driver: bridge
+
+volumes:
+  wordpress_files:
+    driver: local 
+    driver_opts:
+      type: none 
+      device: /home/oagrram/data/wordpress 
+      o: bind
+
+  wordpress_db:
+    driver: local 
+    driver_opts:
+      type: none 
+      device: /home/oagrram/data/mariadb
+      o: bind
