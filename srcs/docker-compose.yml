@@ -10,7 +10,7 @@ services:
     container_name: nginx
     restart: unless-stopped
     volumes:
-      - wordpress_files:/var/www/wordpress
+      - wordpress:/var/www/wordpress
     ports:
     - "443:443"
     - "80:80"
@@ -27,7 +27,7 @@ services:
       - mariadb
     restart: unless-stopped
     volumes:
-      - wordpress_files:/var/www/wordpress/
+      - wordpress:/var/www/wordpress/
     ports:
     - "9000:9000"
     env_file:
@@ -43,7 +43,7 @@ services:
     container_name: mariadb
     restart: unless-stopped
     volumes:
-      - wordpress_db:/var/lib/mysql/
+      - mariadb:/var/lib/mysql/
     ports:
     - "3306:3306"
     env_file:
@@ -60,14 +60,14 @@ networks:
     driver: bridge
 
 volumes:
-  wordpress_files:
+  wordpress:
     driver: local 
     driver_opts:
       type: none 
-      device: /home/oagrram/data/wordpress 
+      device: /home/oagrram/data/wordpress
       o: bind
 
-  wordpress_db:
+  mariadb:
     driver: local 
     driver_opts:
       type: none 

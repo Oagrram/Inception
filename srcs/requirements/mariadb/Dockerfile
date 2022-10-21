@@ -2,11 +2,10 @@ FROM  debian:buster
 
 RUN apt update && apt -y upgrade
 
+COPY setup_db.sh /usr/local/bin/
 
-COPY Setup_Database.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/setup_db.sh
 
 EXPOSE 3306
 
-#CMD  "/etc/Setup_Database.sh"
-
-ENTRYPOINT ["sh" , "/usr/local/bin/Setup_Database.sh"]
+ENTRYPOINT ["sh" , "/usr/local/bin/setup_db.sh"]
