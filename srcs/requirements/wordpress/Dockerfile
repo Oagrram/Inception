@@ -10,7 +10,7 @@ RUN apt install -y php-mysql && service php8.1-fpm start
 
 RUN sed -i 's+/run/php/php8.1-fpm.sock+0.0.0.0:9000+g' /etc/php/8.1/fpm/pool.d/www.conf
 
-COPY setup_wp.sh /usr/local/bin/
+COPY ./tools/setup_wp.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/setup_wp.sh
 

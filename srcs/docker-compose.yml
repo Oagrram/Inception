@@ -59,6 +59,8 @@ networks:
     name: network
     driver: bridge
 
+# volumes
+
 volumes:
   wordpress:
     driver: local 

@@ -15,6 +15,6 @@ prune: clean
 	@ rm -rf /home/oagrram/data/wordpress/* && rm -rf /home/oagrram/data/mariadb/* 
 
 reload:
-	@ docker-compose -f srcs/docker-compose.yml up --build	
+	@ docker-compose -f srcs/docker-compose.yml up --build
 
 .PHONY: linux stop clean prune reload all

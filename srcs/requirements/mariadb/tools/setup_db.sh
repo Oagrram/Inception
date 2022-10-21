@@ -3,6 +3,7 @@
 
 apt install -y mariadb-server
 
+
 # config mariadb
 
 sed -i 's+bind-address            = 127.0.0.1+bind-address= 0.0.0.0+g' /etc/mysql/mariadb.conf.d/50-server.cnf 
@@ -31,5 +32,6 @@ if [ ! -d /var/lib/mysql/${WP_DATABASE_NAME} ]; then
 fi
 
 kill `cat /var/run/mysqld/mysqld.pid`
+
 
 mysqld_safe
