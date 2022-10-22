@@ -13,7 +13,7 @@ wp core config --path=${WP_PATH} --dbname=${WP_DATABASE_NAME} --dbuser=${DB_USER
 
 echo  "\e[1;32m----------------INSTALL WORDPRESS---------------------\e[0m"
 
-wp core install --url=$WEBSITE_DOMAIN --title="ZABOB LIL AKHBAR" --admin_name=${DB_USER} --admin_password=${DB_PASSWORD} --admin_email=oagrram.1337@gmail.com --allow-root
+wp core install --url=$WEBSITE_DOMAIN --title="Wordpress Lahi 7san L3wan" --admin_name=${DB_USER} --admin_password=${DB_PASSWORD} --admin_email=oagrram.1337@gmail.com --allow-root
 
 echo  "\e[1;34m------------------------------------------------------\e[0m"
 

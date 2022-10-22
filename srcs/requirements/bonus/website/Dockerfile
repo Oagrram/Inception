@@ -11,9 +11,3 @@ RUN chmod 777 /var/www/html/*
 EXPOSE 80
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
-
-
-
-# docker build  . -t website
-# docker run  --rm -p 8080:80 website
-# docker image prune

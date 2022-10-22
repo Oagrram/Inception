@@ -14,8 +14,8 @@ services:
     ports:
     - "443:443"
     - "80:80"
-    networks: 
-      - network
+    networks:
+      - inception
 
 # Wordpress Container
 
@@ -33,7 +33,7 @@ services:
     env_file:
         - .env
     networks:
-      - network
+      - inception
 
 # Mariadb Container
 
@@ -49,14 +49,57 @@ services:
     env_file:
         - .env
     networks:
-      - network
+      - inception
 
+# Adminer container
+
+  adminer:
+    build: requirements/bonus/adminer
+    image: adminer
+    container_name: adminer
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    networks:
+      - inception
+    ports:
+      - "8080:8080"
+
+# Static Website container
+
+  website:
+    build: requirements/bonus/website
+    image: website
+    container_name: website
+    restart: unless-stopped
+    ports:
+      - "1337:80"
+    networks:
+      - inception
+
+# cadvisor container
+
+  cadvisor:
+    build: requirements/bonus/cadvisor
+    image: cadvisor
+    container_name: cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    networks:
+        - inception
+    ports:
+      - "7000:7000"
 
 # Network
 
 networks:
-  network:
-    name: network
+  inception:
+    name: inception
     driver: bridge
 
 # volumes
