@@ -11,6 +11,10 @@ The aim of this project is to build and up the following services using docker-c
 
 As a one of the bonus, there is also a static webpage.
 
+Here is an example diagram of the expected result:
+
+<img width="562" alt="Screen Shot 2021-12-22 at 8 38 03 PM" src="https://user-images.githubusercontent.com/54292953/147146268-a616f39a-3f16-41f8-80c9-db5494c3dfe7.png">
+
 ## Info, tips & links
 
 ```
