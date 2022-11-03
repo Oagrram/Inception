@@ -1,6 +1,6 @@
 # 42 inception
 
-## Description
+## <img src="https://www.docker.com/sites/default/files/d8/2019-07/vertical-logo-monochromatic.png"  width="40px"> About the project
 
 The aim of this project is to build and up the following services using docker-compose:
 - MariaDB
